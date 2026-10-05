@@ -43,17 +43,12 @@ namespace PCVerwaltung
                 return;
             }
 
-            // Optional: CPU↔Mainboard-Sockel prüfen, falls CPU.Sockel existiert
-            var cpuSockelProp = typeof(CPU).GetProperty("Sockel");
-            if (cpuSockelProp != null)
+            // CPU↔Mainboard-Sockel prüfen
+            if (selCpu.SockelTyp != selMb.Sockel)
             {
-                var cpuSockel = cpuSockelProp.GetValue(selCpu);
-                if (!Equals(cpuSockel, selMb.Sockel))
-                {
-                    MessageBox.Show($"Sockel nicht kompatibel:\nCPU {cpuSockel} ↔ Board {selMb.Sockel}",
-                                    "Inkompatibel", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+                MessageBox.Show($"Sockel nicht kompatibel:\nCPU {selCpu.SockelTyp} ↔ Board {selMb.Sockel}",
+                                "Inkompatibel", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
             // Speichern
