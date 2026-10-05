@@ -9,6 +9,7 @@ namespace PCVerwaltung.Classes
     public class Case : HardwareKomponente
     {
         public Formfaktor Formfaktor { get; set; } = Formfaktor.ATX;
+        public double Benchmark { get; protected set; } = 0;
 
         public Case(string hersteller, string modell, Formfaktor formfaktor) : base(hersteller,modell)
         {
@@ -25,7 +26,7 @@ namespace PCVerwaltung.Classes
         public override void berechneBenchmark()
         {
 
-            int Benchmark = Formfaktor switch
+            Benchmark = Formfaktor switch
             {
                 Formfaktor.ATX => 10,
                 Formfaktor.MicroATX => 7,

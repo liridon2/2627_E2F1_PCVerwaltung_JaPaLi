@@ -26,6 +26,7 @@ namespace PCVerwaltung
             new CPU("AMD","AMD Ryzen 5 5600", SockelTyp.AM4, 6, 12, 3.5, 4.4),
             new CPU("Intel", "Intel Core i7-12700F", SockelTyp.LGA1700, 12, 20, 2.1, 4.9),
             new CPU("AMD", "AMD Ryzen 7 5700G", SockelTyp.AM4, 8, 16, 3.8, 4.6),
+            new CPU("AMD", "AMD Ryzen 7 5700G", SockelTyp.AM7, 8, 8, 4.9, 4.6),
         };
 
         public static List<Mainboard> Mainboards { get; } = new()

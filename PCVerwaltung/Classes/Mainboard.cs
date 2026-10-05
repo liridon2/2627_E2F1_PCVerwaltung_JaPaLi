@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace PCVerwaltung.Classes
 {
-    /// <summary>
-    /// Reines DTO für den Transport/Binding – ohne Logik.
-    /// </summary>
     public class Mainboard : HardwareKomponente
     {
         public Guid Id { get; }

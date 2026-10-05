@@ -12,16 +12,16 @@ namespace PCVerwaltung.Classes
         public SockelTyp SockelTyp { get; set; } = SockelTyp.AM5;
         public int Kerne { get; set; } = 0;
         public int Threads { get; set; } = 0;
-        public double TaktGHz { get; set; } = 0.0;
+        public double Taktfrequenz { get; set; } = 0.0;
         public double MaxTaktGHz { get; set; } = 0.0;
         public double Benchmark { get; private set; } = 5;
 
-        public CPU(string hersteller, string modell, SockelTyp sockeltyp, int kerne, int threads, double taktGHz, double maxTaktGHz) : base(hersteller, modell)
+        public CPU(string hersteller, string modell, SockelTyp sockeltyp, int kerne, int threads, double taktfrequenz, double maxTaktGHz) : base(hersteller, modell)
         {
             SockelTyp = sockeltyp;
             Kerne = kerne;
             Threads = threads;
-            TaktGHz = taktGHz;
+            Taktfrequenz = taktfrequenz;
             MaxTaktGHz = maxTaktGHz;
             berechneBenchmark();
         }
