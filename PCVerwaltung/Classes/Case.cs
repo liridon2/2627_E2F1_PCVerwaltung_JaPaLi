@@ -6,17 +6,33 @@ using System.Threading.Tasks;
 
 namespace PCVerwaltung.Classes
 {
-    public class Case
+    public class Case : HardwareKomponente
     {
-        public string Hersteller { get; set; } = "";
-        public string Modell { get; set; } = "";
         public Formfaktor Formfaktor { get; set; } = Formfaktor.ATX;
 
-        public Case(string hersteller, string modell, Formfaktor formfaktor)
+        public Case(string hersteller, string modell, Formfaktor formfaktor) : base(hersteller,modell)
         {
-            Hersteller = hersteller;
-            Modell = modell;
-            Formfaktor = formfaktor;
+            //Hersteller und modell müssen gefüllt sein
+//            if (string.IsNullOrWhiteSpace(hersteller)) throw new Exception("Herstelelr  ist Pflicht.");
+  //          if (string.IsNullOrEmpty(modell)) throw new Exception("Modell ist Pflicht.");
+
+            this.Formfaktor = formfaktor;
+
+
+            berechneBenchmark();
+        }
+
+        public override void berechneBenchmark()
+        {
+
+            int Benchmark = Formfaktor switch
+            {
+                Formfaktor.ATX => 10,
+                Formfaktor.MicroATX => 7,
+                Formfaktor.MiniITX => 4,
+                _ => 0
+            };
+
         }
     }
 }
