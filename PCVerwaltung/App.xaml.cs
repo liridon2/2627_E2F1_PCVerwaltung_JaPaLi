@@ -1,4 +1,5 @@
 ﻿using PCVerwaltung.Classes;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -45,6 +46,13 @@ namespace PCVerwaltung
             new PC(Cases[2], CPUs[1], Mainboards[2]), // MiniITX,  AM4
             new PC(Cases[3], CPUs[4], Mainboards[0]), // ATX,      AM5
             new PC(Cases[4], CPUs[3], Mainboards[2]), // ATX-Gehäuse mit MiniITX-Board, AM4
+        };
+
+        public static ObservableCollection<Kunde> Kunden { get; } = new()
+        {
+            new Kunde("Musterfirma GmbH", Finanzierung.Rechnung, "A"),
+            new Kunde("Beispiel AG", Finanzierung.Ratenzahlung, "B"),
+            new Kunde("Testkunde KG", Finanzierung.Bar, "C"),
         };
 
     }
