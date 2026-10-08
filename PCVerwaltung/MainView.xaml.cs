@@ -37,7 +37,7 @@ namespace PCVerwaltung
                 // TODO: hier weiterverarbeiten (DB speichern, Liste refreshen, etc.)
                 // z.B. Debug.WriteLine($"{data.Hersteller} - {data.Modell} - {data.Formfaktor}");
                 App.Cases.Add(data);
-                
+
             };
             ContentHost.Content = view;
         }
@@ -46,6 +46,20 @@ namespace PCVerwaltung
         private void OnMenuPcSystemAssemble(object sender, RoutedEventArgs e) => ContentHost.Content = new PcBuilderView();
 
         private void OnMenuGenerateInvoice(object sender, RoutedEventArgs e) => ContentHost.Content = new PcBuilderView();
+
+        private void OnMenuKundeEinpflegen(object sender, RoutedEventArgs e)
+        {
+            var view = new KundeView();
+            view.Saved += data =>
+            {
+                App.Kunden.Add(data);
+                KundenMeldung.MessageQueue?.Enqueue($"Kunde gespeichert: {data.Kundenname}");
+            };
+            view.Cancelled += () => ContentHost.Content = new AllListsView();
+            ContentHost.Content = view;
+        }
+
+        private void OnMenuKundeAnzeigen(object sender, RoutedEventArgs e) => ContentHost.Content = new KundenListView();
 
         private void OnMenuMainboard(object sender, RoutedEventArgs e) => ContentHost.Content = new MainboardView();
         private void OnMenuCpu(object sender, RoutedEventArgs e) => ContentHost.Content = new CpuView();

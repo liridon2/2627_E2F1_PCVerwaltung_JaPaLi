@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PCVerwaltung"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
     <UserControl.Resources>
@@ -63,6 +64,20 @@
                         <!-- Falls deine CPU einen Sockel hat:
                         <DataGridTextColumn Header="Sockel" Binding="{Binding Sockel}" Width="*"/>
                         -->
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- Kunden -->
+            <TabItem Header="Kunden">
+                <DataGrid ItemsSource="{Binding Source={x:Static local:App.Kunden}}"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          CanUserAddRows="False" HeadersVisibility="Column"
+                          EnableRowVirtualization="True" Margin="4">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kundenname"  Binding="{Binding Kundenname}"  Width="2*" />
+                        <DataGridTextColumn Header="Zahlungsart" Binding="{Binding Zahlungsart}" Width="*" />
+                        <DataGridTextColumn Header="Ranking"     Binding="{Binding Ranking}"     Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

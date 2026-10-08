@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PCVerwaltung.Classes
 {
-    class Kunde
+    public class Kunde
     {
         public string Kundenname { get; set; } = "";
-        public string Zahlungsart { get; set; } = "";
+        public Finanzierung Zahlungsart { get; set; }
         public string Ranking { get; set; } = "";
 
-        public Kunde(string kundenname, string zahlungsart, string ranking)
+        public Kunde(string kundenname, Finanzierung zahlungsart, string ranking)
         {
             Kundenname = kundenname;
             Zahlungsart = zahlungsart;
