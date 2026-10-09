@@ -8,7 +8,7 @@
 ---
 
 ##  Positiv
-* **Effektive Daily Meetings:** Sehr guter Austausch (Dank an Janina für die Idee!).
+* **Effektive Daily Meetings:** Sehr guter Austausch 
 * **Gut gepflegtes Taskboard:** Transparenter und stets aktueller Status der Aufgaben.
 * **Erfolgreiches Debugging:** Fehler wurden zügig erkannt und behoben.
 * **Positives Arbeitsklima:** Angenehme und konstruktive Atmosphäre im Team.
