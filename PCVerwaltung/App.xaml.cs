@@ -1,7 +1,7 @@
 ﻿using PCVerwaltung.Classes;
+using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data;
+using System.IO;
 using System.Windows;
 
 namespace PCVerwaltung
@@ -11,6 +11,37 @@ namespace PCVerwaltung
     /// </summary>
     public partial class App : Application
     {
+        // Reines Datei-Auslesen: DB_CONNECTION_STRING aus .env einlesen (kein Validieren)
+        public static string ConnectionString { get; private set; } = string.Empty;
+
+        static App()
+        {
+            try
+            {
+                var envPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".env");
+                if (!File.Exists(envPath)) envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+
+                if (File.Exists(envPath))
+                {
+                    foreach (var raw in File.ReadAllLines(envPath))
+                    {
+                        var line = raw?.Trim();
+                        if (string.IsNullOrEmpty(line)) continue;
+                        if (line.StartsWith("#")) continue;
+                        var idx = line.IndexOf('=');
+                        if (idx <= 0) continue;
+                        var key = line.Substring(0, idx).Trim();
+                        if (!string.Equals(key, "DB_CONNECTION_STRING", StringComparison.OrdinalIgnoreCase)) continue;
+                        ConnectionString = line.Substring(idx + 1).Trim().Trim('"','\'');
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                ConnectionString = string.Empty;
+            }
+        }
 
         public static List<Case> Cases { get; } = new()
         {
