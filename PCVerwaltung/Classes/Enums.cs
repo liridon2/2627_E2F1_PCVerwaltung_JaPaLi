@@ -72,11 +72,16 @@ namespace PCVerwaltung.Classes
         _80PlusPlatin
     }
 
-    public enum Finanzierung
+    public enum Ranking
     {
-        Rechnung,
+        PRIME,
+        STANDARD,
+        LOW
+    }
+
+    public enum Zahlungsart
+    {
         Bar,
-        Ratenzahlung,
-        Leasing
+        Finanzierung
     }
 }
