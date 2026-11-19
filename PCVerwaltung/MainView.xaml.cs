@@ -61,6 +61,15 @@ namespace PCVerwaltung
 
         private void OnMenuKundeAnzeigen(object sender, RoutedEventArgs e) => ContentHost.Content = new KundenListView();
 
+        private void OnMenuZahlungsart(object sender, RoutedEventArgs e)
+        {
+            var view = new ZahlungsartView();
+            view.Saved += kunde =>
+                KundenMeldung.MessageQueue?.Enqueue(
+                    $"Zahlungsart gespeichert: {kunde.Kundenname} zahlt per {kunde.Zahlungsart}.");
+            ContentHost.Content = view;
+        }
+
         private void OnMenuMainboard(object sender, RoutedEventArgs e) => ContentHost.Content = new MainboardView();
         private void OnMenuCpu(object sender, RoutedEventArgs e) => ContentHost.Content = new CpuView();
         private void OnMenuRam(object sender, RoutedEventArgs e) => ContentHost.Content = new RamView();
