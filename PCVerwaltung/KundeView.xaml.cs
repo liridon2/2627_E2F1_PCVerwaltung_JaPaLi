@@ -1,5 +1,6 @@
 using PCVerwaltung.Classes;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,8 +19,37 @@ namespace PCVerwaltung
         public KundeView()
         {
             InitializeComponent();
-            cmbZahlungsart.ItemsSource = Enum.GetValues(typeof(Finanzierung)).Cast<Finanzierung>();
-            cmbZahlungsart.SelectedItem = Finanzierung.Rechnung;
+
+            cmbRanking.ItemsSource = Enum.GetValues(typeof(Ranking)).Cast<Ranking>();
+            cmbZahlungsart.ItemsSource = Enum.GetValues(typeof(Zahlungsart)).Cast<Zahlungsart>();
+
+            ResetFields();
+        }
+
+        private void OnAuswahlChanged(object sender, SelectionChangedEventArgs e) => AktualisiereHinweis();
+
+        private void AktualisiereHinweis()
+        {
+            // beim Aufbau ist noch nichts gewählt
+            if (cmbRanking?.SelectedItem is not Ranking ranking ||
+                cmbZahlungsart?.SelectedItem is not Zahlungsart zahlungsart ||
+                txtHinweis is null)
+            {
+                return;
+            }
+
+            txtHinweis.Visibility = Visibility.Visible;
+
+            if (!Kunde.IstErlaubt(ranking, zahlungsart))
+            {
+                txtHinweis.Foreground = ErrorBrush;
+                txtHinweis.Text = Kunde.Begruendung(ranking, zahlungsart);
+                return;
+            }
+
+            var erlaubt = string.Join(", ", Kunde.ErlaubteZahlungsarten(ranking));
+            txtHinweis.Foreground = SystemColors.GrayTextBrush;
+            txtHinweis.Text = $"Zulässig für Ranking {ranking}: {erlaubt}.";
         }
 
         private void OnSaveClick(object sender, RoutedEventArgs e)
@@ -34,15 +64,35 @@ namespace PCVerwaltung
                 ok = false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtRanking.Text))
+            if (cmbRanking.SelectedItem is not Ranking ranking)
             {
-                SetError(txtRanking, "Bitte Ranking angeben.");
+                SetError(cmbRanking, "Bitte Ranking auswählen.");
                 ok = false;
+                ranking = Ranking.STANDARD;
+            }
+
+            if (cmbZahlungsart.SelectedItem is not Zahlungsart zahlungsart)
+            {
+                SetError(cmbZahlungsart, "Bitte Zahlungsart auswählen.");
+                ok = false;
+                zahlungsart = Zahlungsart.Bar;
             }
 
             if (!ok) return;
 
-            var data = new Kunde(txtKundenname.Text.Trim(), (Finanzierung)cmbZahlungsart.SelectedItem, txtRanking.Text.Trim());
+            Kunde data;
+            try
+            {
+                data = new Kunde(txtKundenname.Text.Trim(), zahlungsart, ranking);
+            }
+            catch (InvalidOperationException ex)
+            {
+                SetError(cmbZahlungsart, ex.Message);
+                MessageBox.Show(ex.Message, "Zahlungsart nicht zulässig",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                AktualisiereHinweis();
+                return;
+            }
 
             // An Host signalisieren (zeigt u.a. die Erfolgsmeldung an)
             Saved?.Invoke(data);
@@ -60,9 +110,10 @@ namespace PCVerwaltung
         private void ResetFields()
         {
             txtKundenname.Text = "";
-            txtRanking.Text = "";
-            cmbZahlungsart.SelectedItem = Finanzierung.Rechnung;
+            cmbRanking.SelectedItem = Ranking.STANDARD;
+            cmbZahlungsart.SelectedItem = Zahlungsart.Bar;
             ClearAllErrors();
+            AktualisiereHinweis();
         }
 
         #region Simple-Validation-Helpers
@@ -85,7 +136,8 @@ namespace PCVerwaltung
         private void ClearAllErrors()
         {
             ClearError(txtKundenname);
-            ClearError(txtRanking);
+            ClearError(cmbRanking);
+            ClearError(cmbZahlungsart);
         }
         #endregion
     }

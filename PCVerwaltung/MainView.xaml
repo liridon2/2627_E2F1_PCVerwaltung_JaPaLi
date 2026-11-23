@@ -26,6 +26,7 @@
                 <MenuItem Header="Kunden">
                     <MenuItem Header="_Einpflegen" Click="OnMenuKundeEinpflegen"/>
                     <MenuItem Header="_Anzeigen" Click="OnMenuKundeAnzeigen"/>
+                    <MenuItem Header="_Zahlungsart festlegen" Click="OnMenuZahlungsart"/>
                     <MenuItem Header="_Bearbeiten" Click="OnMenuGenerateInvoice"/>
                 </MenuItem>
             </Menu>
