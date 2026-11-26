@@ -61,12 +61,11 @@ namespace PCVerwaltung
 
         private void OnMenuKundeAnzeigen(object sender, RoutedEventArgs e) => ContentHost.Content = new KundenListView();
 
-        private void OnMenuZahlungsart(object sender, RoutedEventArgs e)
+        private void OnMenuKundeBearbeiten(object sender, RoutedEventArgs e)
         {
-            var view = new ZahlungsartView();
+            var view = new KundeBearbeitenView();
             view.Saved += kunde =>
-                KundenMeldung.MessageQueue?.Enqueue(
-                    $"Zahlungsart gespeichert: {kunde.Kundenname} zahlt per {kunde.Zahlungsart}.");
+                KundenMeldung.MessageQueue?.Enqueue($"Kunde gespeichert: {kunde.Kundenname}");
             ContentHost.Content = view;
         }
 

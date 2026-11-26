@@ -64,6 +64,30 @@ namespace PCVerwaltung
                 ok = false;
             }
 
+            if (string.IsNullOrWhiteSpace(txtStrasse.Text))
+            {
+                SetError(txtStrasse, "Bitte Straße angeben.");
+                ok = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPlz.Text))
+            {
+                SetError(txtPlz, "Bitte PLZ angeben.");
+                ok = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtOrt.Text))
+            {
+                SetError(txtOrt, "Bitte Ort angeben.");
+                ok = false;
+            }
+
+            if (!Kunde.IstGueltigeEMail(txtEMail.Text))
+            {
+                SetError(txtEMail, "Bitte eine gültige E-Mail-Adresse angeben.");
+                ok = false;
+            }
+
             if (cmbRanking.SelectedItem is not Ranking ranking)
             {
                 SetError(cmbRanking, "Bitte Ranking auswählen.");
@@ -83,12 +107,14 @@ namespace PCVerwaltung
             Kunde data;
             try
             {
-                data = new Kunde(txtKundenname.Text.Trim(), zahlungsart, ranking);
+                var adresse = new Adresse(txtStrasse.Text, txtPlz.Text, txtOrt.Text);
+                data = new Kunde(txtKundenname.Text, adresse, txtEMail.Text, txtTelefon.Text,
+                                 zahlungsart, ranking);
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
                 SetError(cmbZahlungsart, ex.Message);
-                MessageBox.Show(ex.Message, "Zahlungsart nicht zulässig",
+                MessageBox.Show(ex.Message, "Eingabe nicht zulässig",
                                 MessageBoxButton.OK, MessageBoxImage.Warning);
                 AktualisiereHinweis();
                 return;
@@ -110,6 +136,11 @@ namespace PCVerwaltung
         private void ResetFields()
         {
             txtKundenname.Text = "";
+            txtStrasse.Text = "";
+            txtPlz.Text = "";
+            txtOrt.Text = "";
+            txtEMail.Text = "";
+            txtTelefon.Text = "";
             cmbRanking.SelectedItem = Ranking.STANDARD;
             cmbZahlungsart.SelectedItem = Zahlungsart.Bar;
             ClearAllErrors();
@@ -136,6 +167,10 @@ namespace PCVerwaltung
         private void ClearAllErrors()
         {
             ClearError(txtKundenname);
+            ClearError(txtStrasse);
+            ClearError(txtPlz);
+            ClearError(txtOrt);
+            ClearError(txtEMail);
             ClearError(cmbRanking);
             ClearError(cmbZahlungsart);
         }

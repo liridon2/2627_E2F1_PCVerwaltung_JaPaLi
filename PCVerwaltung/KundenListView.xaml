@@ -22,6 +22,9 @@
                   EnableRowVirtualization="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Kundenname"  Binding="{Binding Kundenname}"  Width="2*" />
+                <DataGridTextColumn Header="Adresse"     Binding="{Binding Adresse}"     Width="2*" />
+                <DataGridTextColumn Header="E-Mail"      Binding="{Binding EMail}"       Width="2*" />
+                <DataGridTextColumn Header="Telefon"     Binding="{Binding Telefon}"     Width="*" />
                 <DataGridTextColumn Header="Zahlungsart" Binding="{Binding Zahlungsart}" Width="*" />
                 <DataGridTextColumn Header="Ranking"     Binding="{Binding Ranking}"     Width="*" />
             </DataGrid.Columns>
