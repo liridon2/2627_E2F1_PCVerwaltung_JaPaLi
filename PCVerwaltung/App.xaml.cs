@@ -81,10 +81,21 @@ namespace PCVerwaltung
 
         public static ObservableCollection<Kunde> Kunden { get; } = new()
         {
-            new Kunde("Musterfirma GmbH", Zahlungsart.Finanzierung, Ranking.PRIME),
-            new Kunde("Beispiel AG",      Zahlungsart.Finanzierung, Ranking.STANDARD),
-            new Kunde("Testkunde KG",     Zahlungsart.Bar,          Ranking.STANDARD),
-            new Kunde("Kleinkunde e.K.",  Zahlungsart.Bar,          Ranking.LOW),
+            new Kunde("Musterfirma GmbH", new Adresse("Hauptstr. 1", "40210", "Düsseldorf"),
+                      "info@musterfirma.de", "0211 1234567",
+                      Zahlungsart.Finanzierung, Ranking.PRIME),
+
+            new Kunde("Beispiel AG", new Adresse("Industrieweg 12", "50667", "Köln"),
+                      "einkauf@beispiel-ag.de", "0221 9876543",
+                      Zahlungsart.Finanzierung, Ranking.STANDARD),
+
+            new Kunde("Testkunde KG", new Adresse("Am Markt 7", "44135", "Dortmund"),
+                      "buchhaltung@testkunde.de", "0231 5551234",
+                      Zahlungsart.Bar, Ranking.STANDARD),
+
+            new Kunde("Kleinkunde e.K.", new Adresse("Gartenweg 3", "45127", "Essen"),
+                      "kontakt@kleinkunde.de", "0201 4448888",
+                      Zahlungsart.Bar, Ranking.LOW),
         };
 
     }

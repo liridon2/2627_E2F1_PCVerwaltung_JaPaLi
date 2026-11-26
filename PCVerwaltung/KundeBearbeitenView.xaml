@@ -1,0 +1,80 @@
+<UserControl x:Class="PCVerwaltung.KundeBearbeitenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Grid Margin="12" MaxWidth="520">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Kunde -->
+        <TextBlock Text="Kunde:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="cmbKunde" Grid.Column="1" Margin="0,4"
+                  SelectionChanged="OnKundeChanged"/>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="2" Margin="0,8"/>
+
+        <!-- Kundenname -->
+        <TextBlock Grid.Row="2" Text="Kundenname:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtKundenname" Grid.Row="2" Grid.Column="1" Margin="0,4"/>
+
+        <!-- Strasse -->
+        <TextBlock Grid.Row="3" Text="Straße:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtStrasse" Grid.Row="3" Grid.Column="1" Margin="0,4"/>
+
+        <!-- PLZ und Ort -->
+        <TextBlock Grid.Row="4" Text="PLZ / Ort:" VerticalAlignment="Center" Margin="0,6"/>
+        <Grid Grid.Row="4" Grid.Column="1" Margin="0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtPlz" Margin="0,0,8,0"/>
+            <TextBox x:Name="txtOrt" Grid.Column="1"/>
+        </Grid>
+
+        <!-- E-Mail -->
+        <TextBlock Grid.Row="5" Text="E-Mail:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtEMail" Grid.Row="5" Grid.Column="1" Margin="0,4"/>
+
+        <!-- Telefon -->
+        <TextBlock Grid.Row="6" Text="Telefon:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtTelefon" Grid.Row="6" Grid.Column="1" Margin="0,4"/>
+
+        <!-- Ranking -->
+        <TextBlock Grid.Row="7" Text="Ranking:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="cmbRanking" Grid.Row="7" Grid.Column="1" Margin="0,4"
+                  SelectionChanged="OnAuswahlChanged"/>
+
+        <!-- Zahlungsart -->
+        <TextBlock Grid.Row="8" Text="Zahlungsart:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="cmbZahlungsart" Grid.Row="8" Grid.Column="1" Margin="0,4"
+                  SelectionChanged="OnAuswahlChanged"/>
+
+        <!-- Hinweis und Buttons -->
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2">
+            <TextBlock x:Name="txtHinweis" Margin="0,8,0,0"
+                       TextWrapping="Wrap" Visibility="Collapsed"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+                <Button Content="Speichern" Width="110" Margin="0,0,8,0" Click="OnSaveClick"/>
+                <Button Content="Verwerfen" Width="100" Click="OnCancelClick"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

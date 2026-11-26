@@ -11,6 +11,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,22 +26,45 @@
         <TextBlock Text="Kundenname:" VerticalAlignment="Center" Margin="0,6"/>
         <TextBox x:Name="txtKundenname" Grid.Column="1" Margin="0,4"/>
 
+        <!-- Strasse -->
+        <TextBlock Grid.Row="1" Text="Straße:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtStrasse" Grid.Row="1" Grid.Column="1" Margin="0,4"/>
+
+        <!-- PLZ und Ort -->
+        <TextBlock Grid.Row="2" Text="PLZ / Ort:" VerticalAlignment="Center" Margin="0,6"/>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtPlz" Margin="0,0,8,0"/>
+            <TextBox x:Name="txtOrt" Grid.Column="1"/>
+        </Grid>
+
+        <!-- E-Mail -->
+        <TextBlock Grid.Row="3" Text="E-Mail:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtEMail" Grid.Row="3" Grid.Column="1" Margin="0,4"/>
+
+        <!-- Telefon -->
+        <TextBlock Grid.Row="4" Text="Telefon:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="txtTelefon" Grid.Row="4" Grid.Column="1" Margin="0,4"/>
+
         <!-- Ranking -->
-        <TextBlock Grid.Row="1" Text="Ranking:" VerticalAlignment="Center" Margin="0,6"/>
-        <ComboBox x:Name="cmbRanking" Grid.Row="1" Grid.Column="1" Margin="0,4"
+        <TextBlock Grid.Row="5" Text="Ranking:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="cmbRanking" Grid.Row="5" Grid.Column="1" Margin="0,4"
                   SelectionChanged="OnAuswahlChanged"/>
 
         <!-- Zahlungsart -->
-        <TextBlock Grid.Row="2" Text="Zahlungsart:" VerticalAlignment="Center" Margin="0,6"/>
-        <ComboBox x:Name="cmbZahlungsart" Grid.Row="2" Grid.Column="1" Margin="0,4"
+        <TextBlock Grid.Row="6" Text="Zahlungsart:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="cmbZahlungsart" Grid.Row="6" Grid.Column="1" Margin="0,4"
                   SelectionChanged="OnAuswahlChanged"/>
 
         <!-- Hinweis -->
-        <TextBlock x:Name="txtHinweis" Grid.Row="3" Grid.ColumnSpan="2"
+        <TextBlock x:Name="txtHinweis" Grid.Row="7" Grid.ColumnSpan="2"
                    Margin="0,8,0,0" TextWrapping="Wrap" Visibility="Collapsed"/>
 
         <!-- Buttons -->
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Right" Margin="0,12,0,0">
             <Button Content="Speichern" Width="110" Margin="0,0,8,0" Click="OnSaveClick"/>
             <Button Content="Abbrechen" Width="100" Click="OnCancelClick"/>
